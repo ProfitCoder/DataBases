@@ -78,6 +78,12 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE('Su dni: ' || v_dni || ' Nombre: ' || v_nombre || ' Edad:' || v_edad);
             
         END LOOP;
+
+            IF c_personas%rowcount = 0 THEN
+                CLOSE c_alumno;
+                    RAISE no_data_found;
+            END IF;
+
     CLOSE c_personas;
     
     EXCEPTION
