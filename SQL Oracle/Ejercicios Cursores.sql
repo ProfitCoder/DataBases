@@ -7,7 +7,9 @@ CREATE TABLE personas(
 
 DESCRIBE personas;
 
+-----------
 -- Inserts
+-----------
 
 INSERT INTO personas(dni,nombre,apellidos,edad) VALUES ('11','Juan','Álvarez',18);
 INSERT INTO personas(dni,nombre,apellidos,edad) VALUES ('22','José','Jiménez',22);
@@ -22,7 +24,10 @@ SELECT * FROM personas;
 
 SET SERVEROUTPUT ON;
 
--- 1. Construya un bloque PL/SQL que pida al usuario su nombre por teclado y que posteriormente lo visualice de la siguiente forma "El nombre introducido es: Nombre"
+/* 
+1. Construya un bloque PL/SQL que pida al usuario su nombre por teclado y que posteriormente lo 
+visualice de la siguiente forma "El nombre introducido es: Nombre"
+*/
 
 DECLARE
     v_nombre personas.nombre%TYPE := '&Nombre';
