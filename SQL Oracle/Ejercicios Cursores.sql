@@ -50,3 +50,37 @@ BEGIN
         WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('No se encuentra el DNI');
         WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Ha ocurrido un error inesperado');
 END;
+
+/* 
+2.1- Construya un bloque PL/SQL que pida por teclado una edad y que
+posteriormente se muestre el nombre y la edad de todas las personas más jovenes de esa edad
+Controla las posibles excepciones
+*/
+
+DECLARE
+    edad_usuario personas.edad%TYPE := '&IntroduceEdad';
+    v_dni personas.dni%TYPE;
+    v_nombre personas.nombre%TYPE;
+    v_edad personas.edad%TYPE;
+    
+    CURSOR c_personas IS
+    SELECT dni,nombre,edad  
+    FROM personas 
+    WHERE edad_usuario <= edad;
+
+BEGIN
+    OPEN c_personas;
+        LOOP
+            FETCH c_personas INTO v_dni,v_nombre, v_edad;
+            
+            EXIT WHEN c_personas%NOTFOUND;
+            
+            DBMS_OUTPUT.PUT_LINE('Su dni: ' || v_dni || ' Nombre: ' || v_nombre || ' Edad:' || v_edad);
+            
+        END LOOP;
+    CLOSE c_personas;
+    
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN DBMS_OUTPUT.PUT_LINE('No hemos encontrado a alguien con esa edad');
+        WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('Error desconocido');
+END;
